@@ -1,0 +1,63 @@
+\documentclass[UTF8]{article}
+\usepackage{xeCJK,ctex,enumitem,graphicx,amsmath,amssymb,tabularx,supertabular,multirow,makecell,lscape}
+\usepackage[squaren]{SIunits}
+\usepackage{boxedminipage}
+\usepackage[a5paper,left=18mm,right=18mm,top=15mm,bottom=15mm]{geometry}
+\usepackage{pifont}
+\usepackage[perpage]{footmisc}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\cfoot{\thepage}
+\title{对冲基金的费用计算}
+\author{吟啸且徐行（雨云丘山）}
+\date{}
+\begin{document}
+\maketitle
+\section{费用项目介绍}
+对冲基金的费用，有时候用“2 and 20”来表示。其中，“2”表示管理费为2\%，“20”表示业绩费为20\%。\\
+\indent 基金中基金会额外收取“1 and 10”的费用。
+\subsection{管理费}
+管理费根据基金规模每年按照固定比例征收，与投资结果无关。可以基于期初或期末。
+\subsection{业绩费}
+业绩费的计算相对复杂。业绩费基于增额部分收费。它可以基于扣除管理费之后的资产（题目中出现net of management fees），也可以在扣除管理费之前（题目出现management fee and incentive fee are calculated independently）。\\
+\indent \textbf{门槛收益率（hurdle rate）}表示拿到激励费的最低回报率，通常基于无风险利率。可以是\textbf{硬门槛}，即按照超过门槛的部分收取业绩费；也可以是\textbf{软门槛}，基于整个收益收费。\\
+\indent 例如，某基金期初管理资金100万元，期末涨到了110万元，门槛收益率为5\%，业绩费为20\%,盈利率\(=\dfrac{110-100}{100}\times 100\%=10\%>5\%\)，超过了门槛回报率，因此可以得到业绩费。按照硬门槛，业绩费为\((110-100\times 1.05)\times 0.2=1\)万元；按照软门槛，业绩费为\(110-100)\times 0.2=2\)万元。\\
+\indent \textbf{高水位线（high water rate）}表示基金的历史最高水平。只有超过高水位线，才能以超出部分为基准计算业绩费。高水位线的目的是避免对重复的业绩二次收费。
+\subsection{费用谈判}
+有限合伙人和一般合伙人谈判确定基金费用。一般情况下，投资期限越长，费率越低。
+\section{题目考法}
+例题来自于CFA\(^{\textregistered}\)官方教材与练习平台。\\
+\indent \textbf{【例题1】}The following information is available about a hedge fund:\\
+\begin{center}
+\begin{tabular}{|m{5cm}|m{4cm}|} \hline
+Initial fund assets & \$100 million \\ \hline
+Fund assets at the end of the period (before fees)& \$110 million \\ \hline
+Management fee based on assets under management& 2\% \\ \hline
+Incentive fee based on the return& 20\% \\ \hline
+Soft hurdle rate& 8\% \\ \hline
+\end{tabular}
+\end{center}
+\indent No deposits to the fund or withdrawals from the fund occurred during the year. Management fees are calculated using end-of-period valuation. Management fees and incentive fees are calculated independently. The net-of-fees return of the investor is closest to: \\
+\indent A.7.8\%.\\
+\indent B.7.4\%.\\
+\indent C.5.8\%.\\
+\indent 【解答】首先判断有没有业绩费，初始管理资产为100万美元，期末毛收入为110万美元，超过了hurdle rate（门槛收益率），因此是有业绩费的。\\
+\indent 题目中说“Management fees and incentive fees are calculated independently”，因此业绩费的计准是扣除管理费之前的盈利。又因为本题为软门槛，因此业绩费基于全部盈利进行计算。\\
+\indent 综上，投资者净收益为\(\text{总收益}-\text{管理费}-\text{业绩费}=110-110\times0.02-(110-100)\times0.2=5.8\)，收益率为\(\dfrac{5.8}{100}=5.8\%\)。本题选C。\\
+\indent \textbf{【例题2】}An investor allocates \$10 million at the beginning of the year to a hedge fund charging a management fee of 2\% and an incentive fee of 20\% with a 6\% (hard) hurdle rate. At year-end the value of the investment is \$11.8 million. The incentive fee is calculated net of the management fee and the management fee is based on the year-end value. The net-of-fees return the investor earned is closest to: \\
+\indent A.13.71\%. \\
+\indent B.13.24\%. \\
+\indent C.13.93\%. \\
+\indent 【解答】管理费基于年末价值计算，其值为\(11.8\times0.02=0.236\)百万美元。\\
+\indent 业绩费的部分，首先判断有没有业绩费；业绩费基于扣除管理费的净值，扣除管理费后的收益为\(11.8\times(1-0.02)=15.64>10.6\)，超过了硬门槛，因此有业绩费。基于高出硬门槛的部分计算业绩费得\([11.8\times(1-0.02)-10.6]\times0.2=0.1936\)。因此，投资者净收益为\(\dfrac{11.8-10-0.236-0.1936}{10}=13.70\%\)，正确答案为A。
+\section{总结}
+计算对冲基金费用一般可以按照以下几个步骤进行：
+\begin{enumerate}[fullwidth,itemindent=3em]
+\item 计算管理费。
+\item 判断有无业绩费。
+\item 识别业绩费计算方式并计算业绩费。
+\item 注意题目问的是费用还是净收益。
+\item 如果题目中涉及基金中基金，很可能会有额外的收费。
+\end{enumerate}
+\end{document}
